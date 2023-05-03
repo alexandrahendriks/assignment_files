@@ -1,10 +1,7 @@
 __winc_id__ = "ae539110d03e49ea8738fd413ac44ba8"
 __human_name__ = "files"
 
-'''You need to master the following to complete this assignment:
 
-    Importing and using Python modules;
-    Reading and understanding Python standard library documentation.'''
 
 #modules
 import os
