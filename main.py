@@ -31,7 +31,7 @@ def clean_cache():
         os.mkdir(cache)
     return
 
-clean_cache()
+#clean_cache()
 
 # Unpacking zip file into cache folder
 def cache_zip(file_path, cache_dir_path):
@@ -49,7 +49,7 @@ def cached_files():
         cache_files.append(f"{cache_path}\{file}")
     return cache_files
 
-cached_files()
+#cached_files()
 
 
 #Finding the password
@@ -64,4 +64,4 @@ def find_password(list):
            break
     return password
 
-find_password(cached_files())    
+#find_password(cached_files())    
