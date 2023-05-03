@@ -9,12 +9,13 @@ __human_name__ = "files"
 #modules
 import os
 import zipfile
+from zipfile import ZipFile
 
 cwd = os.getcwd()
 
 #Defining path
-cache ="cache/"
-file = "files/"
+cache ="cache"
+file = "files"
 cache_dir_path = (f"{cwd}\{file}\{cache}")
 file_path = (f"{cwd}\{file}")
 
@@ -34,4 +35,33 @@ clean_cache()
 
 # Unpacking zip file into cache folder
 def cache_zip(file_path, cache_dir_path):
-    
+    with ZipFile(file_path, "r") as zip_object:
+        zip_object.extractall(cache_dir_path)
+        return  
+
+#cache_zip((f"{file_path}/data.zip"), cache_dir_path)
+
+def cached_files():
+    cache_files = []
+    cache_path = cache_dir_path
+    files = os.listdir(cache_path)
+    for file in files:
+        cache_files.append(f"{cache_path}\{file}")
+    return cache_files
+
+cached_files()
+
+
+#Finding the password
+def find_password(list):
+    word = "password"
+    for file in list:
+       with open(file, "r") as f:
+        content =  f.read()
+        if word in content:
+           begin = content.find("correct")
+           password = content[begin:136]
+           break
+    return password
+
+find_password(cached_files())    
