@@ -57,7 +57,7 @@ def find_password(list):
     word = "password"
     for file in list:
        with open(file, "r") as f:
-        content =  f.read()
+        content = f.read()
         if word in content:
            begin = content.find("correct")
            password = content[begin:136]
