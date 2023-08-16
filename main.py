@@ -1,20 +1,17 @@
 __winc_id__ = "ae539110d03e49ea8738fd413ac44ba8"
 __human_name__ = "files"
 
-
-
 #modules
 import os
-import zipfile
 from zipfile import ZipFile
 
 cwd = os.getcwd()
 
 #Defining path
 cache ="cache"
-file = "files"
-cache_dir_path = (f"{cwd}\{file}\{cache}")
-file_path = (f"{cwd}\{file}")
+data = "data.zip"
+cache_dir_path = os.path.join(cwd, cache)
+file_path = os.path.join(cwd, data)
 
 # Creating cache folder if it doesn't exist and if it does deleteing all files from it
 def clean_cache():
@@ -22,32 +19,25 @@ def clean_cache():
         print("Folder found")
         files = os.listdir(cache_dir_path)
         for file in files:
-            os.remove(f"{cache_dir_path}\{file}")
+            os.remove(os.path.join(cache_dir_path, file))
     elif not os.path.exists(cache_dir_path):
-        os.chdir(file_path)
+        os.chdir(cwd)
         os.mkdir(cache)
     return
 
-#clean_cache()
-
 # Unpacking zip file into cache folder
-def cache_zip(file_path, cache_dir_path):
+def cache_zip():
     with ZipFile(file_path, "r") as zip_object:
         zip_object.extractall(cache_dir_path)
         return  
-
-#cache_zip((f"{file_path}/data.zip"), cache_dir_path)
 
 def cached_files():
     cache_files = []
     cache_path = cache_dir_path
     files = os.listdir(cache_path)
     for file in files:
-        cache_files.append(f"{cache_path}\{file}")
+        cache_files.append(os.path.join(cache_path, file))
     return cache_files
-
-#cached_files()
-
 
 #Finding the password
 def find_password(list):
@@ -61,4 +51,8 @@ def find_password(list):
            break
     return password
 
-#find_password(cached_files())    
+if __name__  == "__main__":
+    clean_cache()
+    cache_zip()
+    cached_files()
+    find_password(cached_files())  
